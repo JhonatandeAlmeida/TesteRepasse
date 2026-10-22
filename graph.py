@@ -11,7 +11,7 @@ import io
 import os
 import base64
 
-
+@st.cache_data(ttl=30)
 def convert_image(string: str) -> str:
     string = string.replace("\\", "/")
     #st.write("Tentando abrir:", string)
