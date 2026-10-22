@@ -105,23 +105,35 @@ COMUM = [
 # ============================================================
 
 @st.cache_data(ttl=3600)
-def convert_image(path: str):
+def convert_image(path):
 
-    path = Path(path)
+    if not path:
+        return None
 
-    with Image.open(path) as image:
+    path = str(path).replace("\\", "/")
 
-        output = io.BytesIO()
+    if not os.path.exists(path):
+        return None
 
-        image.save(
-            output,
-            format="PNG",
+    try:
+        with Image.open(path) as image:
+
+            output = io.BytesIO()
+
+            image.save(
+                output,
+                format="PNG"
+            )
+
+        return (
+            "data:image/png;base64,"
+            + base64.b64encode(
+                output.getvalue()
+            ).decode()
         )
 
-    return (
-        "data:image/png;base64,"
-        + base64.b64encode(output.getvalue()).decode()
-    )
+    except Exception:
+        return None
 
 
 def moeda(series):
