@@ -1,9 +1,6 @@
 import streamlit as st
-
 import altair as alt
-
 from functions import *
-
 import pandas as pd
 import polars as pl
 
