@@ -411,6 +411,19 @@ st.header(f"Resumo Repasse - {TITLE}")
 
 repasse = load_data()
 
+st.markdown("""
+<style>
+button {
+    background:red !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.segmented_control(
+    "",
+    ["A", "B", "C"]
+)
+
 resumo_canais = (
     repasse.select(
         [
